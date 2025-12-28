@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameCard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-gamecard">
+        <div class="title">
+            <h1>GameCard</h1>
+        </div>
+        <div class="totalPrize">
+            <label> Total Bid </label>
+            <br/>
+            <input id="totalPrize" type="text" style="width: 250px;">
+        </div>
+        <div class="detailPlayer">
+            <h3>Player Detail</h3>
+            <div class="player">
+                <label for=""></label>
+                <br/>
+                <input type="text" value="Lucy" placeholder="Player">
+                <input type="number" class="bid" placeholder="Bid" value=0>
+                <input type="text" class="prop" placeholder="Prop">
+                <input type="text" class="profit" placeholder="Profit">
+            </div>
+             <div class="player">
+                <label for=""></label>
+                <br/>
+                <input type="text" value="Dicky" placeholder="Player">
+                <input type="number" class="bid" placeholder="Bid" value=0>
+                <input type="text" class="prop" placeholder="Prop">
+                <input type="text" class="profit" placeholder="Profit">
+            </div>
+             <div class="player">
+                <br/>
+                <input type="text" value="Fio" placeholder="Player">
+                <input type="number" class="bid" placeholder="Bid" value=0>
+                <input type="text" class="prop" placeholder="Prop">
+                <input type="text" class="profit" placeholder="Profit">
+            </div>
+            <div class="player">
+                <br/>
+                <input type="text" value="Fiqa" placeholder="Player">
+                <input type="number" class="bid" placeholder="Bid" value=0>
+                <input type="text" class="prop"  placeholder="Prop" >
+                <input type="text" class="profit" placeholder="Profit">
+            </div>
+            <div class="player">
+                <br/>
+                <input type="text" value="papa"  placeholder="Player">
+                <input type="number" class="bid" placeholder="Bid" value=0>
+                <input type="text" class="prop" placeholder="Prop">
+                <input type="text" class="profit" placeholder="Profit">
+            </div>
+            <br>
+            <input type="submit" onclick='CalcTotalPrize()'>
+        </div>
+        <br/><br/>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function CalcTotalPrize () {
+        const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0 // Untuk menghilangkan desimal jika tidak perlu
+            });
+
+        let a = parseInt(document.getElementsByClassName('bid')[0].value);
+        let b = parseInt(document.getElementsByClassName('bid')[1].value);
+        let c = parseInt(document.getElementsByClassName('bid')[2].value);
+        let d = parseInt(document.getElementsByClassName('bid')[3].value);
+        let e = parseInt(document.getElementsByClassName('bid')[4].value);
+        let total = a+b+c+d+e
+        document.getElementById('totalPrize').value = formatter.format(total);
+        document.getElementsByClassName('prop')[0].value = (Math.ceil((a/total)*100)+'%');
+        document.getElementsByClassName('prop')[1].value = (Math.ceil((b/total)*100)+'%');
+        document.getElementsByClassName('prop')[2].value = (Math.ceil((c/total)*100)+'%');
+        document.getElementsByClassName('prop')[3].value = (Math.ceil((d/total)*100)+'%');
+        document.getElementsByClassName('prop')[4].value = (Math.ceil((e/total)*100)+'%');
+        document.getElementsByClassName('profit')[0].value = a !== 0 ? formatter.format(((total*0.5)+(total))) : 0;
+        document.getElementsByClassName('profit')[1].value = b !== 0 ? formatter.format(((b*0.5)+(total))) : 0;
+        document.getElementsByClassName('profit')[2].value = c !== 0 ? formatter.format(((c*0.5)+(total))) : 0;
+        document.getElementsByClassName('profit')[3].value = d !== 0 ? formatter.format(((d*0.5)+(total))) : 0;
+        document.getElementsByClassName('profit')[4].value = e !== 0 ? formatter.format(((e*0.5)+(total))) : 0 ;
+    }
+
+</script>
