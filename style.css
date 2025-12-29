@@ -1,6 +1,6 @@
 body {
     color: pink;
-    background-color: green;
+    background-color: rgb(75, 28, 136);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -8,8 +8,20 @@ body {
     display: grid;
 }
 
+.wrap-gamecard {
+    border: rgba(255, 255, 255, 0.274) solid;
+    border-radius: 10px;
+    text-align: center;
+    margin: 2px;
+}
+
+.title > span {
+    font-size: 40px;
+}
+
 .detailPlayer {
-    border: solid white;
+    border: solid rgba(255, 255, 255, 0.295);
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -20,4 +32,38 @@ input {
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 15px;
+    padding: 5px;
+    background-color: pink;
+}
+
+.player {
+    border: rgb(74, 19, 85) solid;
+    width: 400px;
+    margin: 5px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name {
+    width: 80px;
+}
+
+.fee {
+    border-radius: 50px;
+    width: 50px;
+    height: 30px;
+}
+
+.fee:hover {
+    background-color: rgb(136, 42, 57);
+    border: white solid;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width:500px) {
+    .bid {width: 80px;}
+    .prop { width: 60px;}
+    .profit {width: 100px;}
 }

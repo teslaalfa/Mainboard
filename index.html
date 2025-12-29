@@ -7,55 +7,81 @@
 </head>
 <body>
     <div class="container-gamecard">
-        <div class="title">
-            <h1>GameCard</h1>
-        </div>
-        <div class="totalPrize">
-            <label> Total Bid </label>
-            <br/>
-            <input id="totalPrize" type="text" style="width: 250px;">
+        <div class="wrap-gamecard">
+            <div class="title">
+                <span>GameCard</span>
+            </div>
+            <div class="totalPrize">
+                <label> Total Bid </label>
+                <br/>
+                <input id="totalPrize" type="text" style="width: 250px;">
+            </div>
+            <div class="WinFee" style="margin-bottom: 2px;">
+                <label> Win Fee  </label>
+                <br/>
+                <input id="WinFee" type="text" style="width: 250px;">
+            </div>
+             <div class="capital" style="margin-bottom: 5px;">
+                <label> Capital </label>
+                <br/>
+                <input id="capital" type="text" style="width: 250px;">
+            </div>
+            <div class="Button">
+                <input type="submit" value="Start" class="btnNav" id='start' onclick="Start()">
+                <input type="submit" value="Stop"  class="btnNav" id='stop' onclick="Stop()" disabled>
+                <input type="submit" Value="Reset" class="btnNav" id='reset' onclick="reset()" disabled>
+                <input type="submit" Value="Result"class="btnNav" id='result'onclick="Income()" disabled>
+            </div>
         </div>
         <div class="detailPlayer">
-            <h3>Player Detail</h3>
-            <div class="player">
-                <label for=""></label>
+            <span style="font-size: 20px;">Player Detail</span>
+            <div class="player" style="background-color: rgb(41, 9, 83);">
+                <label for="">One</label>
+                <span class="earn"></span>
                 <br/>
-                <input type="text" value="Lucy" placeholder="Player">
                 <input type="number" class="bid" placeholder="Bid" value=0>
                 <input type="text" class="prop" placeholder="Prop">
                 <input type="text" class="profit" placeholder="Profit">
+                <input type="submit" class="fee" style="display: none;"  value="Win" onclick="WinFee(0)">
             </div>
-             <div class="player">
-                <label for=""></label>
+             <div class="player" style="background-color: rgb(41, 9, 83);">
+                <label for="">Two</label>
+                <span class="earn">Halo</span>
                 <br/>
-                <input type="text" value="Dicky" placeholder="Player">
                 <input type="number" class="bid" placeholder="Bid" value=0>
                 <input type="text" class="prop" placeholder="Prop">
                 <input type="text" class="profit" placeholder="Profit">
+                <input type="submit" class="fee" style="display: none;"  value="Win" onclick="WinFee(1)">
             </div>
-             <div class="player">
+             <div class="player" style="background-color: rgb(41, 9, 83);">
+                <label for="">Three</label>
+                <span class="earn">Halo</span>
                 <br/>
-                <input type="text" value="Fio" placeholder="Player">
                 <input type="number" class="bid" placeholder="Bid" value=0>
-                <input type="text" class="prop" placeholder="Prop">
-                <input type="text" class="profit" placeholder="Profit">
+                <input type="text" class="prop" placeholder="Prop" >
+                <input type="text" class="profit" placeholder="Profit" >
+                <input type="submit" class="fee" style="display: none;" value="Win" onclick="WinFee(2)">
             </div>
-            <div class="player">
+            <div class="player" style="background-color: rgb(41, 9, 83);">
+                <label for="">Four</label>
+                <span class="earn">Halo</span>
                 <br/>
-                <input type="text" value="Fiqa" placeholder="Player">
-                <input type="number" class="bid" placeholder="Bid" value=0>
-                <input type="text" class="prop"  placeholder="Prop" >
+                <input type="number" class="bid"  placeholder="Bid" value=0>
+                <input type="text" class="prop"   placeholder="Prop" >
                 <input type="text" class="profit" placeholder="Profit">
+                <input type="submit" class="fee" style="display: none;" value="Win" onclick="WinFee(3)">
             </div>
-            <div class="player">
+            <div class="player" style="background-color: rgb(41, 9, 83);">
+                <label for="">Five</label>
+                <span class="earn">Halo</span>
                 <br/>
-                <input type="text" value="papa"  placeholder="Player">
-                <input type="number" class="bid" placeholder="Bid" value=0>
-                <input type="text" class="prop" placeholder="Prop">
+                <input type="number" class="bid"  placeholder="Bid" value=0>
+                <input type="text" class="prop"   placeholder="Prop">
                 <input type="text" class="profit" placeholder="Profit">
+                <input type="submit" class="fee" style="display: none;"  value="Win" onclick="WinFee(4)">
             </div>
-            <br>
-            <input type="submit" onclick='CalcTotalPrize()'>
+            <input type="submit" id="submit"  onclick='CalcTotalPrize()' disabled>
+            <input type="submit" id='newgame' onclick='NewGame()' value="newGame" disabled>
         </div>
         <br/><br/>
     </div>
@@ -70,24 +96,120 @@
             currency: 'IDR',
             minimumFractionDigits: 0 // Untuk menghilangkan desimal jika tidak perlu
             });
-
+        let BtnWin = document.getElementsByClassName('fee');
+        let Bid = document.getElementsByClassName('bid');
         let a = parseInt(document.getElementsByClassName('bid')[0].value);
         let b = parseInt(document.getElementsByClassName('bid')[1].value);
         let c = parseInt(document.getElementsByClassName('bid')[2].value);
         let d = parseInt(document.getElementsByClassName('bid')[3].value);
         let e = parseInt(document.getElementsByClassName('bid')[4].value);
         let total = a+b+c+d+e
+        localStorage.setItem('total',total)
         document.getElementById('totalPrize').value = formatter.format(total);
         document.getElementsByClassName('prop')[0].value = (Math.ceil((a/total)*100)+'%');
         document.getElementsByClassName('prop')[1].value = (Math.ceil((b/total)*100)+'%');
         document.getElementsByClassName('prop')[2].value = (Math.ceil((c/total)*100)+'%');
         document.getElementsByClassName('prop')[3].value = (Math.ceil((d/total)*100)+'%');
         document.getElementsByClassName('prop')[4].value = (Math.ceil((e/total)*100)+'%');
-        document.getElementsByClassName('profit')[0].value = a !== 0 ? formatter.format(((total*0.5)+(total))) : 0;
-        document.getElementsByClassName('profit')[1].value = b !== 0 ? formatter.format(((b*0.5)+(total))) : 0;
-        document.getElementsByClassName('profit')[2].value = c !== 0 ? formatter.format(((c*0.5)+(total))) : 0;
-        document.getElementsByClassName('profit')[3].value = d !== 0 ? formatter.format(((d*0.5)+(total))) : 0;
-        document.getElementsByClassName('profit')[4].value = e !== 0 ? formatter.format(((e*0.5)+(total))) : 0 ;
+        document.getElementsByClassName('profit')[0].value = a !== 0 ? formatter.format(((a*2)+(total))) : 0;
+        document.getElementsByClassName('profit')[1].value = b !== 0 ? formatter.format(((b*2)+(total))) : 0;
+        document.getElementsByClassName('profit')[2].value = c !== 0 ? formatter.format(((c*2)+(total))) : 0;
+        document.getElementsByClassName('profit')[3].value = d !== 0 ? formatter.format(((d*2)+(total))) : 0;
+        document.getElementsByClassName('profit')[4].value = e !== 0 ? formatter.format(((e*2)+(total))) : 0 ;
+        console.log (total);   
+        for (let i =0; i < Bid.length ; i++) {
+            document.getElementsByClassName('fee')[i].style.display = 'inline';
+        }
+        document.getElementById('newGame').style.disabled = false;
+        document.getElementById('submit').style.disabled = true;
     }
+
+function WinFee (n) {
+    const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0 // Untuk menghilangkan desimal jika tidak perlu
+            });
+    let bid = parseInt(document.getElementsByClassName('bid')[n].value);
+    let totalbid = parseInt(localStorage.getItem('total'))
+    let profit = (bid*2)+totalbid;
+    let WinFee = profit-totalbid;
+    let getItem = parseInt(localStorage.getItem(n))
+    console.log (getItem)
+    console.log (profit)
+    let RollEarn = getItem+profit;
+    if (bid !== 0) {
+        document.getElementById('WinFee').value = formatter.format(WinFee);
+        localStorage.setItem(n,RollEarn)
+    }
+    else {
+        alert('Bid harus terisi')
+    }
+}
+
+function Stop() {
+    document.getElementById('start').disabled = false;
+    document.getElementById('stop').disabled = true;
+    document.getElementById('reset').disabled = false;
+    document.getElementsByClassName('capital')[0].style.display='inline';
+}
+
+
+function Start () {
+    let Cap = parseInt(document.getElementById('capital').value);
+    console.log (Cap)
+    let BtnWin = document.getElementsByClassName('fee');
+    let Bid = document.getElementsByClassName('bid');
+    if (Cap !== NaN || Cap !== 'NaN' ){
+        for (let i=0; i < Bid.length; i++ ) {
+        localStorage.setItem(i,Cap)
+        }
+        document.getElementById('start').disabled = true;
+        document.getElementById('reset').disabled = true;
+        document.getElementById('stop').disabled = false;
+        document.getElementById('result').disabled = false;
+        document.getElementById('submit').disabled = false;
+        document.getElementById('newgame').disabled = false;
+        document.getElementsByClassName('capital')[0].style.display='none';
+    }
+    else {
+        alert ('capital empty ?')
+    }
+    
+}
+
+function reset () {
+    localStorage.clear();
+}
+
+function Income () {
+    const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0 // Untuk menghilangkan desimal jika tidak perlu
+    });
+    let BtnWin = document.getElementsByClassName('fee');
+    let Bid = document.getElementsByClassName('bid');
+    let earn = document.getElementsByClassName('earn');
+    for (let i=0; i < Bid.length; i++){
+       document.getElementsByClassName('earn')[i].innerHTML=formatter.format(localStorage.getItem(i))
+    } 
+}
+
+function NewGame () {
+    let BtnWin = document.getElementsByClassName('fee');
+    let Bid = document.getElementsByClassName('bid');
+    let prop = document.getElementsByClassName('prop');
+    let profit = document.getElementsByClassName('profit');
+    for (let i=0; i < Bid.length; i++ ) {
+        Bid[i].value = 0;
+        prop[i].value = '';
+        profit[i].value = '';
+    }
+    document.getElementById('totalPrize').value=0;
+    document.getElementById('WinFee').value=0;
+    document.getElementById('newGame').style.disabled = true;
+    document.getElementById('submit').style.disabled = false;
+}
 
 </script>
