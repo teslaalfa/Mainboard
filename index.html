@@ -27,10 +27,10 @@
                 <input id="capital" type="text" style="width: 250px;">
             </div>
             <div class="Button">
-                <input type="submit" value="Start" class="btnNav" id='start' onclick="Start()">
-                <input type="submit" value="Stop"  class="btnNav" id='stop' onclick="Stop()" disabled>
-                <input type="submit" Value="Reset" class="btnNav" id='reset' onclick="reset()" disabled>
-                <input type="submit" Value="Result"class="btnNav" id='result'onclick="Income()" disabled>
+                <input type="submit" value="Start" class="btnNav" id='start' onclick="Start()" >
+                <input type="submit" value="Stop"  class="btnNav" id='stop' onclick="Stop()"  disabled>
+                <input type="submit" Value="Reset" class="btnNav" id='reset' onclick="reset()"  disabled>
+                <input type="submit" Value="Result"class="btnNav" id='result'onclick="Income()"  disabled>
             </div>
         </div>
         <div class="detailPlayer">
@@ -46,7 +46,7 @@
             </div>
              <div class="player" style="background-color: rgb(41, 9, 83);">
                 <label for="">Two</label>
-                <span class="earn">Halo</span>
+                <span class="earn"></span>
                 <br/>
                 <input type="number" class="bid" placeholder="Bid" value=0>
                 <input type="text" class="prop" placeholder="Prop">
@@ -55,7 +55,7 @@
             </div>
              <div class="player" style="background-color: rgb(41, 9, 83);">
                 <label for="">Three</label>
-                <span class="earn">Halo</span>
+                <span class="earn"></span>
                 <br/>
                 <input type="number" class="bid" placeholder="Bid" value=0>
                 <input type="text" class="prop" placeholder="Prop" >
@@ -64,7 +64,7 @@
             </div>
             <div class="player" style="background-color: rgb(41, 9, 83);">
                 <label for="">Four</label>
-                <span class="earn">Halo</span>
+                <span class="earn"></span>
                 <br/>
                 <input type="number" class="bid"  placeholder="Bid" value=0>
                 <input type="text" class="prop"   placeholder="Prop" >
@@ -73,15 +73,15 @@
             </div>
             <div class="player" style="background-color: rgb(41, 9, 83);">
                 <label for="">Five</label>
-                <span class="earn">Halo</span>
+                <span class="earn"></span>
                 <br/>
                 <input type="number" class="bid"  placeholder="Bid" value=0>
                 <input type="text" class="prop"   placeholder="Prop">
                 <input type="text" class="profit" placeholder="Profit">
                 <input type="submit" class="fee" style="display: none;"  value="Win" onclick="WinFee(4)">
             </div>
-            <input type="submit" id="submit"  onclick='CalcTotalPrize()' disabled>
-            <input type="submit" id='newgame' onclick='NewGame()' value="newGame" disabled>
+            <input type="submit" id="submit"  onclick='CalcTotalPrize()' >
+            <input type="submit" id='newgame' onclick='NewGame()' value="newGame" >
         </div>
         <br/><br/>
     </div>
@@ -111,17 +111,16 @@
         document.getElementsByClassName('prop')[2].value = (Math.ceil((c/total)*100)+'%');
         document.getElementsByClassName('prop')[3].value = (Math.ceil((d/total)*100)+'%');
         document.getElementsByClassName('prop')[4].value = (Math.ceil((e/total)*100)+'%');
-        document.getElementsByClassName('profit')[0].value = a !== 0 ? formatter.format(((a*2)+(total))) : 0;
-        document.getElementsByClassName('profit')[1].value = b !== 0 ? formatter.format(((b*2)+(total))) : 0;
-        document.getElementsByClassName('profit')[2].value = c !== 0 ? formatter.format(((c*2)+(total))) : 0;
-        document.getElementsByClassName('profit')[3].value = d !== 0 ? formatter.format(((d*2)+(total))) : 0;
-        document.getElementsByClassName('profit')[4].value = e !== 0 ? formatter.format(((e*2)+(total))) : 0 ;
+        document.getElementsByClassName('profit')[0].value = a !== 0 ? formatter.format(((a*1)+(total))) : 0;
+        document.getElementsByClassName('profit')[1].value = b !== 0 ? formatter.format(((b*1)+(total))) : 0;
+        document.getElementsByClassName('profit')[2].value = c !== 0 ? formatter.format(((c*1)+(total))) : 0;
+        document.getElementsByClassName('profit')[3].value = d !== 0 ? formatter.format(((d*1)+(total))) : 0;
+        document.getElementsByClassName('profit')[4].value = e !== 0 ? formatter.format(((e*1)+(total))) : 0 ;
         console.log (total);   
         for (let i =0; i < Bid.length ; i++) {
             document.getElementsByClassName('fee')[i].style.display = 'inline';
         }
-        document.getElementById('newGame').style.disabled = false;
-        document.getElementById('submit').style.disabled = true;
+        
     }
 
 function WinFee (n) {
@@ -132,7 +131,7 @@ function WinFee (n) {
             });
     let bid = parseInt(document.getElementsByClassName('bid')[n].value);
     let totalbid = parseInt(localStorage.getItem('total'))
-    let profit = (bid*2)+totalbid;
+    let profit = (bid*1)+totalbid;
     let WinFee = profit-totalbid;
     let getItem = parseInt(localStorage.getItem(n))
     console.log (getItem)
@@ -168,8 +167,6 @@ function Start () {
         document.getElementById('reset').disabled = true;
         document.getElementById('stop').disabled = false;
         document.getElementById('result').disabled = false;
-        document.getElementById('submit').disabled = false;
-        document.getElementById('newgame').disabled = false;
         document.getElementsByClassName('capital')[0].style.display='none';
     }
     else {
