@@ -79,3 +79,24 @@ input {
     .prop { width: 60px;}
     .profit {width: 100px;}
 }
+
+#submit {
+    width: 100px;
+    height: 50px;
+}
+
+#newGame {
+    width: 100px;
+    height: 50px;
+}
+
+#submit:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+#newGame:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
